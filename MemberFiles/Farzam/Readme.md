@@ -2,6 +2,8 @@
 
 ### Instalation Guide:
 * Clone git repository  
-* Run this command in cmd : `npm start`  
-
+* Install yarn or npm(node package manager)  
+* Install parcell using `yarn add parcel`  
+* Build and start files using `build` and `start`  
+* Output files are generated in dist folder  
 

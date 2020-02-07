@@ -41,7 +41,8 @@ const bg = new PIXI.extras.TilingSprite(
   // PIXI.Texture.fromImage('./img/pink dust.png'),
   // PIXI.Texture.fromImage('./img/squared_metal_inv_@2X.png'),
   // PIXI.Texture.fromImage('./img/squared_metal_inv_@2X copy.png'),
-  PIXI.Texture.fromImage("./img/subtle_white_mini_waves.png"),
+  // PIXI.Texture.fromImage("./img/subtle_white_mini_waves.png"),
+  PIXI.Texture.fromImage("./img/white-background.jpg"),
   renderer.width,
   renderer.height
 );

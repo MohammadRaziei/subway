@@ -1,0 +1,25 @@
+{
+    "name": "subway",
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "MIT",
+    "devDependencies": {
+        "@types/animejs": "kohashi/types-npm-animejs",
+        "@types/fbemitter": "^2.0.32",
+        "@types/keymaster": "^1.6.28",
+        "@types/pixi.js": "^4.8.9",
+        "parcel-bundler": "^1.12.4",
+        "typescript": "^3.6.4"
+    },
+    "dependencies": {
+        "animejs": "^2.0.2",
+        "fbemitter": "^2.1.1",
+        "keymaster": "^1.6.2",
+        "parcel": "^1.12.4",
+        "pixi.js": "^4.5.3"
+    },
+    "scripts": {
+        "build": "parcel build ./index.html",
+        "start": "parcel ./index.html"
+    }
+}

@@ -1,0 +1,9 @@
+~*
+
+*.autosave
+
+.cache
+
+
+
+*.zip

@@ -1,6 +1,6 @@
 ## Farzam
 
-![Subway](./subway.PNG)
+![Subway](./TehranSubway.PNG)
 
 ### Instalation Guide:
 * Clone git repository  

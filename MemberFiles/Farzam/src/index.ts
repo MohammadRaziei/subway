@@ -14,7 +14,7 @@ PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
 
 const renderer = new PIXI.CanvasRenderer({
   autoResize: true,
-  backgroundColor: 0x2d2d2d,
+  backgroundColor: 0xe5e5e5,
   height: window.innerHeight,
   resolution: 2,
   roundPixels: true,

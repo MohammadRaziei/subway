@@ -48,8 +48,8 @@ export default class StationSprite extends PIXI.Graphics {
         this._info.addChild(this.cargoText);
 
         this._infoNameText = new PIXI.Text(this._model.name, {
-            fill: 0xB9BB9A,
-            fontSize: 24,
+            fill: 0x000000,
+            fontSize: 20,
             fontWeight: "bold",
             fontFamily:'Times New Roman',
         });

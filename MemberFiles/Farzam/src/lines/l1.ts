@@ -4,7 +4,7 @@ export const data: ILineData[] = [
     {
         id: "101",
         line: "L1",
-        name: "Tajrish",
+        name: "تجریش",
         accessibility: "Adaptada",
         zone: "Zona 1",
         connections: "",
@@ -14,7 +14,7 @@ export const data: ILineData[] = [
     {
         id: "102",
         line: "L1",
-        name: "Gheytariyeh",
+        name: "قیطریه",
         accessibility: "Adaptada",
         zone: "Zona 1",
         connections: "L8-S33-S4-S8-R5-R6",
@@ -24,7 +24,7 @@ export const data: ILineData[] = [
     {
         id: "103",
         line: "L1",
-        name: "Shahid Sadr",
+        name: "شهید صدر",
         accessibility: "Projecte",
         zone: "Zona 1",
         connections: "R.1-R3-R4-R7-R12",
@@ -34,7 +34,7 @@ export const data: ILineData[] = [
     {
         id: "104",
         line: "L1",
-        name: "Gholhak",
+        name: "قلهک",
         accessibility: "Adaptada",
         zone: "Zona 1",
         connections: "",
@@ -44,7 +44,7 @@ export const data: ILineData[] = [
     {
         id: "105",
         line: "L1",
-        name: "Shariati",
+        name: "دکتر شریعتی",
         accessibility: "Adaptada",
         zone: "Zona 1",
         connections: "",
@@ -54,7 +54,7 @@ export const data: ILineData[] = [
     {
         id: "106",
         line: "L1",
-        name: "Mirdamad",
+        name: "میرداماد",
         accessibility: "Adaptada",
         zone: "Zona 1",
         connections: "",
@@ -64,7 +64,7 @@ export const data: ILineData[] = [
     {
         id: "107",
         line: "L1",
-        name: "Shahid Haghani",
+        name: "شهید حقانی",
         accessibility: "Adaptada",
         zone: "Zona 1",
         connections: "",
@@ -74,7 +74,7 @@ export const data: ILineData[] = [
     {
         id: "108",
         line: "L1",
-        name: "Shahid Hemmat",
+        name: "شهید همت",
         accessibility: "Adaptada",
         zone: "Zona 1",
         connections: "",
@@ -84,7 +84,7 @@ export const data: ILineData[] = [
     {
         id: "109",
         line: "L1",
-        name: "Mosalla Imam Khomeini",
+        name: "مصلای امام خمینی",
         accessibility: "Projecte",
         zone: "Zona 1",
         connections: "L5",
@@ -94,7 +94,7 @@ export const data: ILineData[] = [
     {
         id: "110",
         line: "L1",
-        name: "Shahid Beheshti",
+        name: "شهید بهشتی",
         accessibility: "Adaptada",
         zone: "Zona 1",
         connections: "",
@@ -104,7 +104,7 @@ export const data: ILineData[] = [
     {
         id: "111",
         line: "L1",
-        name: "Shahid Mofatteh",
+        name: "شهید مفتح",
         accessibility: "Projecte",
         zone: "Zona 1",
         connections: "L3-L8-S33-S4-S8-R5-R6",
@@ -114,7 +114,7 @@ export const data: ILineData[] = [
     {
         id: "112",
         line: "L1",
-        name: "Shohada-ye Haftom-e Tir",
+        name: "شهدای هفتم تیر",
         accessibility: "Adaptada",
         zone: "Zona 1",
         connections: "",
@@ -124,7 +124,7 @@ export const data: ILineData[] = [
     {
         id: "113",
         line: "L1",
-        name: "Taleghani",
+        name: "طالقانی",
         accessibility: "Adaptada",
         zone: "Zona 1",
         connections: "",
@@ -134,7 +134,7 @@ export const data: ILineData[] = [
     {
         id: "114",
         line: "L1",
-        name: "Darvazeh Dowlat",
+        name: "دروازه دولت",
         accessibility: "Adaptada",
         zone: "Zona 1",
         connections: "L2",
@@ -144,7 +144,7 @@ export const data: ILineData[] = [
     {
         id: "115",
         line: "L1",
-        name: "Saadi",
+        name: "سعدی",
         accessibility: "Adaptada",
         zone: "Zona 1",
         connections: "L3-L6-L7-S1-S2-S5-S55-R.1-R3-R4-R7-R12",
@@ -154,7 +154,7 @@ export const data: ILineData[] = [
     {
         id: "116",
         line: "L1",
-        name: "Imam Khomeini",
+        name: "امام خمینی",
         accessibility: "Projecte",
         zone: "Zona 1",
         connections: "L4",
@@ -164,7 +164,7 @@ export const data: ILineData[] = [
     {
         id: "117",
         line: "L1",
-        name: "Panzdah-e-Khordad (15th of Khordad)",
+        name: "پانزده خرداد",
         accessibility: "Adaptada",
         zone: "Zona 1",
         connections: "ESTACIO_BUS-R.1-R3-R4-R7-R12",
@@ -174,7 +174,7 @@ export const data: ILineData[] = [
     {
         id: "118",
         line: "L1",
-        name: "Khayam",
+        name: "خیام",
         accessibility: "Adaptada",
         zone: "Zona 1",
         connections: "T4-T5-T6",
@@ -184,7 +184,7 @@ export const data: ILineData[] = [
     {
         id: "119",
         line: "L1",
-        name: "Meydan-e Mohammadiyeh ",
+        name: "میدان محمدیه",
         accessibility: "Adaptada",
         zone: "Zona 1",
         connections: "T4-T5-T6",
@@ -194,7 +194,7 @@ export const data: ILineData[] = [
     {
         id: "120",
         line: "L1",
-        name: "Shush",
+        name: "شوش",
         accessibility: "Projecte",
         zone: "Zona 1",
         connections: "L2-R.1-R2-R.2N-R11",
@@ -204,7 +204,7 @@ export const data: ILineData[] = [
     {
         id: "121",
         line: "L1",
-        name: "Payane Jonoob",
+        name: "پایانهٔ جنوب",
         accessibility: "Adaptada",
         zone: "Zona 1",
         connections: "",
@@ -214,7 +214,7 @@ export const data: ILineData[] = [
     {
         id: "122",
         line: "L1",
-        name: "Shahid Bokharaei",
+        name: "شهید بخارایی",
         accessibility: "Adaptada",
         zone: "Zona 1",
         connections: "L5-L9-L10",
@@ -224,7 +224,7 @@ export const data: ILineData[] = [
     {
         id: "123",
         line: "L1",
-        name: "Ali Abad",
+        name: "علی‌آباد",
         accessibility: "Adaptada",
         zone: "Zona 1",
         connections: "ESTACIO_BUS-R3-R4-R7-R12",
@@ -234,7 +234,7 @@ export const data: ILineData[] = [
     {
         id: "124",
         line: "L1",
-        name: "Javanmard-e-Ghassab",
+        name: "جوانمرد قصاب",
         accessibility: "Adaptada",
         zone: "Zona 1",
         connections: "",
@@ -244,7 +244,7 @@ export const data: ILineData[] = [
     {
         id: "125",
         line: "L1",
-        name: "Shahr-e-Rey",
+        name: "شهرری",
         accessibility: "Adaptada",
         zone: "Zona 1",
         connections: "",
@@ -254,7 +254,7 @@ export const data: ILineData[] = [
     {
         id: "126",
         line: "L1",
-        name: "Palayeshgah",
+        name: "پالایشگاه",
         accessibility: "Adaptada",
         zone: "Zona 1",
         connections: "",
@@ -264,7 +264,7 @@ export const data: ILineData[] = [
     {
         id: "127",
         line: "L1",
-        name: "Shahed - Bagher Shahr",
+        name: "شاهد–باقرشهر",
         accessibility: "Adaptada",
         zone: "Zona 1",
         connections: "",
@@ -274,7 +274,7 @@ export const data: ILineData[] = [
     {
         id: "128",
         line: "L1",
-        name: "Haram-e Motahhar-e Emam Khomeini",
+        name: "حرم مطهر امام خمینی",
         accessibility: "Adaptada",
         zone: "Zona 1",
         connections: "",
@@ -284,7 +284,7 @@ export const data: ILineData[] = [
     {
         id: "129",
         line: "L1",
-        name: "Kahrizak",
+        name: "کهریزک",
         accessibility: "Adaptada",
         zone: "Zona 1",
         connections: "L9",

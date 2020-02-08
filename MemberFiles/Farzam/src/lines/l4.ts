@@ -4,7 +4,7 @@ export const data: ILineData[] = [
   {
     id: "402",
     line: "L4",
-    name: "Shahid Kolahdooz",
+    name: "شهید کلاهدوز",
     accessibility: "Adaptada",
     zone: "Zona 1",
     connections: "",
@@ -14,7 +14,7 @@ export const data: ILineData[] = [
   {
     id: "403",
     line: "L4",
-    name: "Nirooye Havaei",
+    name: "نیروهوایی",
     accessibility: "Adaptada",
     zone: "Zona 1",
     connections: "",
@@ -24,7 +24,7 @@ export const data: ILineData[] = [
   {
     id: "404",
     line: "L4",
-    name: "Nabard",
+    name: "نبرد",
     accessibility: "Projecte",
     zone: "Zona 1",
     connections: "L5",
@@ -34,7 +34,7 @@ export const data: ILineData[] = [
   {
     id: "405",
     line: "L4",
-    name: "Piroozi",
+    name: "پیروزی",
     accessibility: "Adaptada",
     zone: "Zona 1",
     connections: "",
@@ -44,7 +44,7 @@ export const data: ILineData[] = [
   {
     id: "406",
     line: "L4",
-    name: "Ebn-e Sina",
+    name: "ابن سینا",
     accessibility: "Adaptada",
     zone: "Zona 1",
     connections: "",
@@ -54,7 +54,7 @@ export const data: ILineData[] = [
   {
     id: "407",
     line: "L4",
-    name: "Meydan-e Shohada",
+    name: "میدان شهدا",
     accessibility: "Adaptada",
     zone: "Zona 1",
     connections: "",
@@ -64,7 +64,7 @@ export const data: ILineData[] = [
   {
     id: "408",
     line: "L4",
-    name: "Darvazeh Shemiran",
+    name: "دروازه شمیران",
     accessibility: "Projecte",
     zone: "Zona 1",
     connections: "L5",
@@ -74,7 +74,7 @@ export const data: ILineData[] = [
   {
     id: "409",
     line: "L4",
-    name: "Darvazeh Dowlat",
+    name: "دروازه دولت",
     accessibility: "Adaptada",
     zone: "Zona 1",
     connections: "",
@@ -84,7 +84,7 @@ export const data: ILineData[] = [
   {
     id: "410",
     line: "L4",
-    name: "Ferdowsi",
+    name: "فردوسی",
     accessibility: "Adaptada",
     zone: "Zona 1",
     connections: "L2-L3-R2-R.2N-R.2S-R11-R13-R14-R15-R16",
@@ -94,7 +94,7 @@ export const data: ILineData[] = [
   {
     id: "411",
     line: "L4",
-    name: "Teatr-e Shahr",
+    name: "تئاتر شهر",
     accessibility: "Projecte",
     zone: "Zona 1",
     connections: "L1",
@@ -104,7 +104,7 @@ export const data: ILineData[] = [
   {
     id: "412",
     line: "L4",
-    name: "Meydan-e Enghelab-e Eslami",
+    name: "میدان انقلاب اسلامی",
     accessibility: "Projecte",
     zone: "Zona 1",
     connections: "",
@@ -114,7 +114,7 @@ export const data: ILineData[] = [
   {
     id: "413",
     line: "L4",
-    name: "Towhid",
+    name: "توحید",
     accessibility: "Adaptada",
     zone: "Zona 1",
     connections: "",
@@ -124,7 +124,7 @@ export const data: ILineData[] = [
   {
     id: "414",
     line: "L4",
-    name: "Shademan",
+    name: "شادمان",
     accessibility: "Projecte",
     zone: "Zona 1",
     connections: "T4-T5-T6",
@@ -134,7 +134,7 @@ export const data: ILineData[] = [
   {
     id: "415",
     line: "L4",
-    name: "Doctor Habib-o-llah",
+    name: "دکتر حبیب‌الله",
     accessibility: "Construcció",
     zone: "Zona 1",
     connections: "",
@@ -144,7 +144,7 @@ export const data: ILineData[] = [
   {
     id: "416",
     line: "L4",
-    name: "Ostad Moein",
+    name: "استاد معین",
     accessibility: "Construcció",
     zone: "Zona 1",
     connections: "",
@@ -154,7 +154,7 @@ export const data: ILineData[] = [
   {
     id: "417",
     line: "L4",
-    name: "Meydan-e Azadi",
+    name: "میدان آزادی",
     accessibility: "Projecte",
     zone: "Zona 1",
     connections: "",
@@ -164,7 +164,7 @@ export const data: ILineData[] = [
   {
     id: "418",
     line: "L4",
-    name: "Bimeh",
+    name: "بیمه",
     accessibility: "Adaptada",
     zone: "Zona 1",
     connections: "T4-T5-T6",
@@ -174,7 +174,7 @@ export const data: ILineData[] = [
   {
     id: "419",
     line: "L4",
-    name: "Shahrak-e Ekbatan",
+    name: "شهرک اکباتان",
     accessibility: "Adaptada",
     zone: "Zona 1",
     connections: "T4-T5-T6",
@@ -184,7 +184,7 @@ export const data: ILineData[] = [
   {
     id: "420",
     line: "L4",
-    name: "Eram-e Sabz",
+    name: "ارم سبز",
     accessibility: "Adaptada",
     zone: "Zona 1",
     connections: "",

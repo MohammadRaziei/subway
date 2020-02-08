@@ -4,7 +4,7 @@ export const data: ILineData[] = [
   {
     id: "501",
     line: "L5",
-    name: "Tehran (Sadeghiyeh)",
+    name: "(تهران (صادقیه",
     accessibility: "Adaptada",
     zone: "Zona 1",
     connections: "",
@@ -14,7 +14,7 @@ export const data: ILineData[] = [
   {
     id: "502",
     line: "L5",
-    name: "Eram-e Sabz",
+    name: "ارم سبز",
     accessibility: "Adaptada",
     zone: "Zona 1",
     connections: "",
@@ -24,7 +24,7 @@ export const data: ILineData[] = [
   {
     id: "503",
     line: "L5",
-    name: "Varzeshgah-e Azadi",
+    name: "ورزشگاه آزادی",
     accessibility: "Adaptada",
     zone: "Zona 1",
     connections: "",
@@ -34,7 +34,7 @@ export const data: ILineData[] = [
   {
     id: "504",
     line: "L5",
-    name: "Chitgar",
+    name: "چیتگر",
     accessibility: "Adaptada",
     zone: "Zona 1",
     connections: "",
@@ -44,7 +44,7 @@ export const data: ILineData[] = [
   {
     id: "505",
     line: "L5",
-    name: "Iran Khodro",
+    name: "ایران خودرو",
     accessibility: "Adaptada",
     zone: "Zona 1",
     connections: "",
@@ -54,7 +54,7 @@ export const data: ILineData[] = [
   {
     id: "506",
     line: "L5",
-    name: "Vardavard",
+    name: "وردآورد",
     accessibility: "Adaptada",
     zone: "Zona 1",
     connections: "",
@@ -64,7 +64,7 @@ export const data: ILineData[] = [
   {
     id: "507",
     line: "L5",
-    name: "Garmdarreh",
+    name: "گرم‌دره",
     accessibility: "Adaptada",
     zone: "Zona 1",
     connections: "",
@@ -74,7 +74,7 @@ export const data: ILineData[] = [
   {
     id: "508",
     line: "L5",
-    name: "Atmosfer",
+    name: "اتمسفر",
     accessibility: "Adaptada",
     zone: "Zona 1",
     connections: "",
@@ -84,7 +84,7 @@ export const data: ILineData[] = [
   {
     id: "509",
     line: "L5",
-    name: "Karaj",
+    name: "کرج",
     accessibility: "Adaptada",
     zone: "Zona 1",
     connections: "",
@@ -94,7 +94,7 @@ export const data: ILineData[] = [
   {
     id: "510",
     line: "L5",
-    name: "Mohammad Shahr (Mahdasht)",
+    name: "محمدشهر",
     accessibility: "Adaptada",
     zone: "Zona 1",
     connections: "",
@@ -104,7 +104,7 @@ export const data: ILineData[] = [
   {
     id: "511",
     line: "L5",
-    name: "Golshahr",
+    name: "گلشهر",
     accessibility: "Adaptada",
     zone: "Zona 1",
     connections: "",

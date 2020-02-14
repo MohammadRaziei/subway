@@ -65,22 +65,7 @@ function onDragEnd() {
   dragging = false;
 }
 
-function zoomIn() {
-  let x = 0;
-  let y = 0;
-  let rate = 1.2;
-  var worldPos = { x: (x - layers.x) / layers.scale.x, y: (y - layers.y) / layers.scale.y };
-  var newScale = { x: layers.scale.x * rate, y: layers.scale.y * rate };
-  var newScreenPos = { x: (worldPos.x) * newScale.x + layers.x, y: (worldPos.y) * newScale.y + layers.y };
-  layers.x -= (newScreenPos.x - x);
-  layers.y -= (newScreenPos.y - y);
-  layers.scale.x = newScale.x;
-  layers.scale.y = newScale.y;
-}
-
 function layerZoom(rate: number, x: number = 0, y: number = 0) {
-  //let x = 0;
-  //let y = 0;
   var worldPos = { x: (x - layers.x) / layers.scale.x, y: (y - layers.y) / layers.scale.y };
   var newScale = { x: layers.scale.x * rate, y: layers.scale.y * rate };
   var newScreenPos = { x: (worldPos.x) * newScale.x + layers.x, y: (worldPos.y) * newScale.y + layers.y };

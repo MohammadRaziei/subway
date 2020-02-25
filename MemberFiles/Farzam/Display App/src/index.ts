@@ -53,8 +53,8 @@ stage.interactive = true;
 
 const layers = new PIXI.Graphics();
 
-layers.x = -100;
-layers.y = -300;
+layers.x = 1500;
+layers.y = -400;
 const layerRailways = new PIXI.Graphics();
 
 layers.scale.set(0.5);
@@ -65,8 +65,18 @@ function onDragEnd() {
   dragging = false;
 }
 
+function layerZoom(rate: number, x: number = 0, y: number = 0) {
+  var worldPos = { x: (x - layers.x) / layers.scale.x, y: (y - layers.y) / layers.scale.y };
+  var newScale = { x: layers.scale.x * rate, y: layers.scale.y * rate };
+  var newScreenPos = { x: (worldPos.x) * newScale.x + layers.x, y: (worldPos.y) * newScale.y + layers.y };
+  layers.x -= (newScreenPos.x - x);
+  layers.y -= (newScreenPos.y - y);
+  layers.scale.x = newScale.x;
+  layers.scale.y = newScale.y;
+}
+
 layers.interactive = true;
-layers
+stage
   .on("pointerdown", () => {
     dragging = true;
   })
@@ -74,10 +84,38 @@ layers
   .on("pointerupoutside", onDragEnd)
   .on("pointermove", e => {
     if (dragging) {
-      layers.x += e.data.originalEvent.movementX;
-      layers.y += e.data.originalEvent.movementY;
+      let mousedata = e.data.originalEvent as MouseEvent;
+      layers.x += mousedata.movementX;
+      layers.y += mousedata.movementY;
     }
-  });
+  })
+
+document.onwheel = function (e: WheelEvent) {
+  let rate = e.deltaY > 0 ? 0.8 : 1.2;
+  console.log(rate);
+  layerZoom(rate, e.offsetX, e.offsetY);
+};
+document.onkeydown = function (e) {
+  if (e.code == "ArrowUp") {
+    layers.y += 20;
+  }
+  if (e.code == "ArrowLeft") {
+    layers.x += 20;
+  }
+  if (e.code == "ArrowDown") {
+    layers.y -= 20;
+  }
+  if (e.code == "ArrowRight") {
+    layers.x -= 20;
+  }
+  if (e.code == "NumpadAdd") {
+    layerZoom(1.2);
+  }
+  if (e.code == "NumpadSubtract") {
+    layerZoom(0.8);
+  }
+};
+
 
 // layerRailways.rotation = 5.4;
 stage.addChild(layers);
@@ -122,7 +160,10 @@ const net = new Net();
 net.lines.forEach(line => {
   const rw = new RailWay({ id: line.id, line });
 
-  if (line.id !== "L1" && line.id !== "L5" && line.id !== "L9") {
+  // if (line.id !== "L1" && line.id !== "L5" && line.id !== "L9") {
+  //   rw.visible = false;
+  // }
+  if (line.id == "L10") {
     rw.visible = false;
   }
 

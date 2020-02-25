@@ -1,0 +1,30 @@
+select{
+    width: 150px;
+    height:35px ;
+    text-align: center;
+    font-size: 16px;
+    font-family: 'Times New Roman', Times, serif;
+}
+#LL{background-color: #LL;}
+option{    text-align: center;}
+option.line{
+    background-color: gray;
+    text-align: center;
+    font-size: 16px;
+    align-items: center;
+    justify-content: right;
+}
+#line1{
+    background-color:rgb(238, 46, 36);
+}
+#line2{
+    background-color:#0b55a0;
+}
+#line3{
+    background-color:#2bbdee;
+}
+#line4{
+    background-color:#fcc204;
+}
+#nl{
+background-color: rgb(195, 195, 195);}

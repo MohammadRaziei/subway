@@ -5,12 +5,17 @@ class VisibilityToggle extends React.Component {
     this.clickRoute = this.clickRoute.bind(this);
     this.changeRoute = this.changeRoute.bind(this);
     this.clickStation = this.clickStation.bind(this);
-    this.state = {RouteVis: false,StVis:false,sign:'',line:'',station:''};
+    this.state = {RouteVis: false,StVis:false,sign:'',
+    line:'',station:'',linecolor:['#ffffff','#ee2e24','#0b55a0','#2bbdee','#fcc204']};
   }
   changeLine(){
   if (document.getElementById('LL')) {
     this.setState((prevState) => {  return {RouteVis: true};   }     );
     let lineNum=document.getElementById('LL').value;
+    console.log(typeof(lineNum));
+    console.log(lineNum);
+    const color = this.state.linecolor[lineNum[4]];
+    document.getElementById('LL').style.backgroundColor=color;
     this.setState((prevState) => {  return {line: lineNum};   }     );
     fetch(`../src/${lineNum}routes.json`).then(response => response.text()).then(function (data) {localStorage.setItem('stations',data);});
     let Routes=JSON.parse(localStorage.getItem('stations'));
@@ -23,10 +28,12 @@ class VisibilityToggle extends React.Component {
   document.getElementById('negativeRoute').innerHTML=RL[1];
    }}
 clickRoute(){
+  console.log('clickRoute');
   
 }
 changeRoute()
-{
+{console.log('changeRoute');
+
   const sgn=document.getElementById('RL').value;
   this.setState((prevState)=>{  return {StVis: true};   }     );
   this.setState((prevState)=>{  return {sign:sgn};   }     );
@@ -66,12 +73,12 @@ clickStation(){
   render() {
     return (<div>
       <h1>Visibility Toggle</h1>
-      {true &&(<select onChange={this.changeLine} defaultValue='noLine' id='LL'>
-        <option disabled='true' value="noLine">--select line--</option>
-        <option value="line1"> line 1</option>
-        <option value="line2"> line 2</option>
-        <option value="line3"> line 3</option>
-        <option value="line4"> line 4</option>
+      {true &&(<select className='line' onChange={this.changeLine} defaultValue='noLine' id='LL'>
+        <option className='line' id='nl' disabled='true' value="noLine">--select line--</option>
+        <option className='line' id="line1" value="line1">line 1</option>
+        <option className='line' id="line2" value="line2">line 2</option>
+        <option className='line' id="line3" value="line3">line 3</option>
+        <option className='line' id="line4" value="line4">line 4</option>
       </select>)}
 
       {true &&(<select id='RL' defaultValue='noRoute' disabled={!this.state.RouteVis} onClick={this.clickRoute} onChange={this.changeRoute}>

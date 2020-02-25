@@ -1,5 +1,7 @@
 'use strict';
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -20,7 +22,8 @@ var VisibilityToggle = function (_React$Component) {
     _this.clickRoute = _this.clickRoute.bind(_this);
     _this.changeRoute = _this.changeRoute.bind(_this);
     _this.clickStation = _this.clickStation.bind(_this);
-    _this.state = { RouteVis: false, StVis: false, sign: '', line: '', station: '' };
+    _this.state = { RouteVis: false, StVis: false, sign: '',
+      line: '', station: '', linecolor: ['#ffffff', '#ee2e24', '#0b55a0', '#2bbdee', '#fcc204'] };
     return _this;
   }
 
@@ -32,6 +35,10 @@ var VisibilityToggle = function (_React$Component) {
           return { RouteVis: true };
         });
         var lineNum = document.getElementById('LL').value;
+        console.log(typeof lineNum === 'undefined' ? 'undefined' : _typeof(lineNum));
+        console.log(lineNum);
+        var color = this.state.linecolor[lineNum[4]];
+        document.getElementById('LL').style.backgroundColor = color;
         this.setState(function (prevState) {
           return { line: lineNum };
         });
@@ -54,10 +61,14 @@ var VisibilityToggle = function (_React$Component) {
     }
   }, {
     key: 'clickRoute',
-    value: function clickRoute() {}
+    value: function clickRoute() {
+      console.log('clickRoute');
+    }
   }, {
     key: 'changeRoute',
     value: function changeRoute() {
+      console.log('changeRoute');
+
       var sgn = document.getElementById('RL').value;
       this.setState(function (prevState) {
         return { StVis: true };
@@ -114,31 +125,31 @@ var VisibilityToggle = function (_React$Component) {
         ),
         true && React.createElement(
           'select',
-          { onChange: this.changeLine, defaultValue: 'noLine', id: 'LL' },
+          { className: 'line', onChange: this.changeLine, defaultValue: 'noLine', id: 'LL' },
           React.createElement(
             'option',
-            { disabled: 'true', value: 'noLine' },
+            { className: 'line', id: 'nl', disabled: 'true', value: 'noLine' },
             '--select line--'
           ),
           React.createElement(
             'option',
-            { value: 'line1' },
-            ' line 1'
+            { className: 'line', id: 'line1', value: 'line1' },
+            'line 1'
           ),
           React.createElement(
             'option',
-            { value: 'line2' },
-            ' line 2'
+            { className: 'line', id: 'line2', value: 'line2' },
+            'line 2'
           ),
           React.createElement(
             'option',
-            { value: 'line3' },
-            ' line 3'
+            { className: 'line', id: 'line3', value: 'line3' },
+            'line 3'
           ),
           React.createElement(
             'option',
-            { value: 'line4' },
-            ' line 4'
+            { className: 'line', id: 'line4', value: 'line4' },
+            'line 4'
           )
         ),
         true && React.createElement(

@@ -18,16 +18,25 @@ var VisibilityToggle = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (VisibilityToggle.__proto__ || Object.getPrototypeOf(VisibilityToggle)).call(this, props));
 
+    _this.changeDay = _this.changeDay.bind(_this);
     _this.changeLine = _this.changeLine.bind(_this);
     _this.clickRoute = _this.clickRoute.bind(_this);
     _this.changeRoute = _this.changeRoute.bind(_this);
     _this.clickStation = _this.clickStation.bind(_this);
-    _this.state = { RouteVis: false, StVis: false, sign: '',
+    _this.state = { RouteVis: false, StVis: false, day: '', sign: '',
       line: '', station: '', linecolor: ['#ffffff', '#ee2e24', '#0b55a0', '#2bbdee', '#fcc204'] };
     return _this;
   }
 
   _createClass(VisibilityToggle, [{
+    key: 'changeDay',
+    value: function changeDay() {
+      var newDay = document.getElementById('DL').value;
+      this.setState(function (prevState) {
+        return { day: newDay };
+      });
+    }
+  }, {
     key: 'changeLine',
     value: function changeLine() {
       if (document.getElementById('LL')) {
@@ -122,6 +131,35 @@ var VisibilityToggle = function (_React$Component) {
           'h1',
           null,
           'Visibility Toggle'
+        ),
+        React.createElement(
+          'select',
+          { onChange: this.changeDay, defaultValue: 'noDay', id: 'DL' },
+          React.createElement(
+            'option',
+            { className: 'day', id: 'nd', disabled: 'true', value: 'noDay' },
+            '--select day--'
+          ),
+          React.createElement(
+            'option',
+            { className: 'day', id: 'day1', value: 'ReguralDay' },
+            'Regural Day'
+          ),
+          React.createElement(
+            'option',
+            { className: 'day', id: 'day2', value: 'ThursDay' },
+            'Thursday'
+          ),
+          React.createElement(
+            'option',
+            { className: 'day', id: 'day3', value: 'FriDay' },
+            'Friday'
+          ),
+          React.createElement(
+            'option',
+            { className: 'day', id: 'day4', value: 'HolliDay' },
+            'Holliday'
+          )
         ),
         true && React.createElement(
           'select',

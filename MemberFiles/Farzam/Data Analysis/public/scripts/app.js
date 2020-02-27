@@ -23,10 +23,14 @@ var VisibilityToggle = function (_React$Component) {
     _this.clickRoute = _this.clickRoute.bind(_this);
     _this.changeRoute = _this.changeRoute.bind(_this);
     _this.clickStation = _this.clickStation.bind(_this);
+    _this.changekStation = _this.changekStation.bind(_this);
+    _this.fetchLine = _this.fetchLine.bind(_this);
     _this.state = { RouteVis: false, StVis: false, day: '', sign: '',
       line: '', station: '', linecolor: ['#ffffff', '#ee2e24', '#0b55a0', '#2bbdee', '#fcc204'] };
     return _this;
   }
+  //event handlers
+
 
   _createClass(VisibilityToggle, [{
     key: 'changeDay',
@@ -99,7 +103,8 @@ var VisibilityToggle = function (_React$Component) {
       }
       for (var _index = 0; _index < stations.length; _index++) {
         var node = document.createElement("option");
-        node.setAttribute("id", 'station' + _index);
+        node.setAttribute("id", '' + _index);
+        node.setAttribute("value", '' + _index);
         document.getElementById('SL').appendChild(node);
       }
     }
@@ -117,9 +122,52 @@ var VisibilityToggle = function (_React$Component) {
       for (var _index2 = 0; _index2 < stations.length; _index2++) {
         var st = stations[_index2];
         if (st) {
-          document.getElementById('station' + _index2).innerHTML = st;
+          document.getElementById('' + _index2).innerHTML = st;
         }
       }
+    }
+  }, {
+    key: 'changekStation',
+    value: function changekStation() {
+      var val = document.getElementById('SL').value;
+      var stName = document.getElementById(val).text;
+      this.setState(function (prevState) {
+        return { station: { 'index': val, 'name': stName } };
+      });
+    }
+  }, {
+    key: 'fetchLine',
+    value: function fetchLine() {
+      var day = this.state.day;
+      var sign = this.state.sign;
+      var station = this.state.station;
+      var line = this.state.line;
+      // fetch(`../src/trainData/trainData_line0${line[4]}_${sign}_${day}.csv`).then(response => response.text()).then(function (data) {localStorage.setItem('stationsData',data);});
+      d3.csv('../src/trainData/trainData_line0' + line[4] + '_' + sign + '_' + day + '.csv', function (data) {
+        console.log(data);
+        console.log(station);
+        console.log(station['index']);
+        console.log(data[station['index']]);
+      });
+    }
+    // helping functions
+
+  }, {
+    key: 'TimeFormatter',
+    value: function TimeFormatter(stringTime) {
+      var newTime = stringTime.split(':');
+      var hour = newTime[0];
+      var minute = newTime[1];
+      return [hour, minute];
+    }
+  }, {
+    key: 'xAxis',
+    value: function xAxis() {
+      var x = [];
+      for (var index = 0; index < 24; index++) {
+        x = x.concat(index);
+      }
+      return x;
     }
   }, {
     key: 'render',
@@ -133,91 +181,101 @@ var VisibilityToggle = function (_React$Component) {
           'Visibility Toggle'
         ),
         React.createElement(
-          'select',
-          { onChange: this.changeDay, defaultValue: 'noDay', id: 'DL' },
+          'form',
+          null,
           React.createElement(
-            'option',
-            { className: 'day', id: 'nd', disabled: 'true', value: 'noDay' },
-            '--select day--'
+            'select',
+            { onChange: this.changeDay, defaultValue: 'noDay', id: 'DL' },
+            React.createElement(
+              'option',
+              { className: 'day', id: 'nd', disabled: 'true', value: 'noDay' },
+              '--select day--'
+            ),
+            React.createElement(
+              'option',
+              { className: 'day', id: 'day1', value: 'regularDay' },
+              'Regural Day'
+            ),
+            React.createElement(
+              'option',
+              { className: 'day', id: 'day2', value: 'thursday' },
+              'Thursday'
+            ),
+            React.createElement(
+              'option',
+              { className: 'day', id: 'day3', value: 'friday' },
+              'Friday'
+            ),
+            React.createElement(
+              'option',
+              { className: 'day', id: 'day4', value: 'holiDay' },
+              'Holliday'
+            )
           ),
-          React.createElement(
-            'option',
-            { className: 'day', id: 'day1', value: 'ReguralDay' },
-            'Regural Day'
+          true && React.createElement(
+            'select',
+            { className: 'line', onChange: this.changeLine, defaultValue: 'noLine', id: 'LL' },
+            React.createElement(
+              'option',
+              { className: 'line', id: 'nl', disabled: 'true', value: 'noLine' },
+              '--select line--'
+            ),
+            React.createElement(
+              'option',
+              { className: 'line', id: 'line1', value: 'line1' },
+              'line 1'
+            ),
+            React.createElement(
+              'option',
+              { className: 'line', id: 'line2', value: 'line2' },
+              'line 2'
+            ),
+            React.createElement(
+              'option',
+              { className: 'line', id: 'line3', value: 'line3' },
+              'line 3'
+            ),
+            React.createElement(
+              'option',
+              { className: 'line', id: 'line4', value: 'line4' },
+              'line 4'
+            )
           ),
-          React.createElement(
-            'option',
-            { className: 'day', id: 'day2', value: 'ThursDay' },
-            'Thursday'
+          true && React.createElement(
+            'select',
+            { id: 'RL', defaultValue: 'noRoute', disabled: !this.state.RouteVis, onClick: this.clickRoute, onChange: this.changeRoute },
+            React.createElement(
+              'option',
+              { disabled: 'true', value: 'noRoute' },
+              '--select route--'
+            ),
+            React.createElement(
+              'option',
+              { id: 'positiveRoute', value: 'positive' },
+              ' line 2'
+            ),
+            React.createElement(
+              'option',
+              { id: 'negativeRoute', value: 'negative' },
+              ' line 3'
+            )
           ),
-          React.createElement(
-            'option',
-            { className: 'day', id: 'day3', value: 'FriDay' },
-            'Friday'
+          this.state.RouteVis && React.createElement(
+            'select',
+            { id: 'SL', disabled: !this.state.StVis, defaultValue: 'noStation', onClick: this.clickStation, onChange: this.changekStation },
+            React.createElement(
+              'option',
+              { disabled: 'true', value: 'noStation' },
+              '--select station--'
+            )
           ),
-          React.createElement(
-            'option',
-            { className: 'day', id: 'day4', value: 'HolliDay' },
-            'Holliday'
+          this.state.day && this.state.sign && this.state.line && this.state.station && React.createElement(
+            'button',
+            { onClick: this.fetchLine },
+            'fetchLine'
           )
         ),
-        true && React.createElement(
-          'select',
-          { className: 'line', onChange: this.changeLine, defaultValue: 'noLine', id: 'LL' },
-          React.createElement(
-            'option',
-            { className: 'line', id: 'nl', disabled: 'true', value: 'noLine' },
-            '--select line--'
-          ),
-          React.createElement(
-            'option',
-            { className: 'line', id: 'line1', value: 'line1' },
-            'line 1'
-          ),
-          React.createElement(
-            'option',
-            { className: 'line', id: 'line2', value: 'line2' },
-            'line 2'
-          ),
-          React.createElement(
-            'option',
-            { className: 'line', id: 'line3', value: 'line3' },
-            'line 3'
-          ),
-          React.createElement(
-            'option',
-            { className: 'line', id: 'line4', value: 'line4' },
-            'line 4'
-          )
-        ),
-        true && React.createElement(
-          'select',
-          { id: 'RL', defaultValue: 'noRoute', disabled: !this.state.RouteVis, onClick: this.clickRoute, onChange: this.changeRoute },
-          React.createElement(
-            'option',
-            { disabled: 'true', value: 'noRoute' },
-            '--select route--'
-          ),
-          React.createElement(
-            'option',
-            { id: 'positiveRoute', value: 'positive' },
-            ' line 2'
-          ),
-          React.createElement(
-            'option',
-            { id: 'negativeRoute', value: 'negative' },
-            ' line 3'
-          )
-        ),
-        this.state.RouteVis && React.createElement(
-          'select',
-          { id: 'SL', disabled: !this.state.StVis, defaultValue: 'noStation', onClick: this.clickStation },
-          React.createElement(
-            'option',
-            { disabled: 'true', value: 'noStation' },
-            '--select station--'
-          )
-        )
+        React.createElement('svg', null)
       );
     }
   }]);

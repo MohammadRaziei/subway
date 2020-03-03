@@ -28,10 +28,6 @@ function xAxis() {
 }
 function dataFormatter(height, width, trainTimes) {
   var y = new Array(24).fill(0);
-  // console.log('dataFormatter');
-  // console.log(height+1);
-  // console.log(width+1);
-  // console.log(trainTimes+1);
   var x = xAxis(),
       Width = parseInt(width),
       Height = parseInt(height);
@@ -48,8 +44,10 @@ function dataFormatter(height, width, trainTimes) {
       y0 = 0,
       x1 = 0;
   for (var _i = 0; _i < 24; _i++) {
-    y0 = y[_i] * Height / yMax;
-    x1 = x[_i] * Width / xMax;
+    // y0=y[i]*Height / yMax;//original
+    // x1=x[i] * Width / xMax;//original
+    y0 = y[_i];
+    x1 = x[_i];
     // dt=dt.concat({x:x1,y:Height-y0});//ORIGINAL
     dt = dt.concat({ x: x1, y: y0 });
   }
@@ -64,9 +62,8 @@ function serieInator(p1, p2, p3, p4, n) {
     var a1 = p1[i],
         a2 = p2[i],
         a3 = p3[i],
-        a4 = p4[i],
-        res0 = {};
-    res = res.concat({ x: a1['x'], regularDay: a1['y'], thursday: a2['y'], friday: a3['y'], holiDay: a4['y'] });
+        a4 = p4[i];
+    res = res.concat({ x: a1['x'], values: [{ value: a1['y'], rate: 'regularDay' }, { value: a2['y'], rate: 'thursday' }, { value: a3['y'], rate: 'friday' }, { value: a4['y'], rate: 'holiDay' }] });
   }
   return res;
 }
@@ -210,8 +207,6 @@ var VisibilityToggle = function (_React$Component) {
     key: 'fetchStatioData',
     value: function fetchStatioData() {
       localStorage.setItem('index', 0);
-      var height = 400,
-          width = 600;
       var sign = this.state.sign,
           station = this.state.station,
           line = this.state.line;
@@ -283,55 +278,88 @@ var VisibilityToggle = function (_React$Component) {
       console.log('inator:');
       var data = serieInator(ds0, ds1, ds2, ds3, ds0['length']);
       console.log(data);
-      var svg = d3.select("svg").attr("width", width).attr("height", height);
-      // const color = d3.scaleOrdinal()
-      //     .domain(data.columns.slice(1))
-      //     .range(d3.schemeCategory10);s
-      var z = d3.interpolateCool;
+      var margin = { top: 20, right: 20, bottom: 30, left: 40 },
+          width = 960 - margin.left - margin.right,
+          height = 500 - margin.top - margin.bottom;
+      var svg = d3.select("body").append("svg").attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-      var stack = d3.stack().keys(['regularDay', 'thursday', 'friday', 'holiDay']).order(d3.stackOrderNone).offset(d3.stackOffsetNone);
+      var x0 = d3.scale.ordinal().rangeRoundBands([0, width], .1);
 
-      var series = stack(data);
-      localStorage.setItem('data', JSON.stringify(data));
-      localStorage.setItem('series', JSON.stringify(series));
-      // series = d3.stack()
-      //     .keys(data.columns.slice(1))
-      //     .offset(d3.stackOffsetWiggle)
-      //     .order(d3.stackOrderInsideOut)
-      //   (data);
-      var margin = { top: 0, right: 20, bottom: 30, left: 20 };
-      var x = d3.scaleUtc().domain(d3.extent(data, function (d) {
+      var x1 = d3.scale.ordinal();
+
+      var y = d3.scale.linear().range([height, 0]);
+
+      var xAxis = d3.svg.axis().scale(x0).tickSize(0).orient("bottom");
+      var yAxis = d3.svg.axis().scale(y).orient("left");
+      var color = d3.scale.ordinal().range(["#ca0020", "#f4a582", "#d5d5d5", "#92c5de", "#0571b0"]);
+
+      var categoriesNames = data.map(function (d) {
         return d.x;
-      })).range([margin.left, width - margin.right]);
-      var y = d3.scaleLinear().domain([d3.min(series, function (d) {
-        return d3.min(d, function (d) {
-          return d[0];
-        });
-      }), d3.max(series, function (d) {
-        return d3.max(d, function (d) {
-          return d[1];
-        });
-      })]).range([height - margin.bottom, margin.top]);
-
-      var area = d3.area().x(function (d) {
-        return x(d.data.x);
-      }).y0(function (d) {
-        return y(d[0]);
-      }).y1(function (d) {
-        return y(d[1]);
+      });
+      var rateNames = data[0].values.map(function (d) {
+        return d.rate;
       });
 
-      svg.append("g").selectAll("path").data(series).join("path")
-      // .attr("fill", ({key}) => color(key))
-      .attr("d", area).attr("fill", function () {
-        return z(Math.random());
-      }).append("title").text(function (_ref) {
-        var key = _ref.key;
-        return key;
+      x0.domain(categoriesNames);
+      x1.domain(rateNames).rangeRoundBands([0, x0.rangeBand()]);
+      y.domain([0, d3.max(data, function (x) {
+        return d3.max(x.values, function (d) {
+          return d.value;
+        });
+      })]);
+
+      //axes
+      svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
+      svg.append("g").attr("class", "y axis").style('opacity', '0').call(yAxis).append("text").attr("transform", "rotate(-90)").attr("y", 6).attr("dy", ".71em").style("text-anchor", "end").style('font-weight', 'bold').text("Value");
+
+      svg.select('.y').transition().duration(500).delay(1300).style('opacity', '1');
+
+      var slice = svg.selectAll(".slice").data(data).enter().append("g").attr("class", "g").attr("transform", function (d) {
+        return "translate(" + x0(d.x) + ",0)";
       });
 
-      // svg.append("g")
-      //     .call(xAxis);
+      slice.selectAll("rect").data(function (d) {
+        return d.values;
+      }).enter().append("rect").attr("width", x1.rangeBand()).attr("x", function (d) {
+        return x1(d.rate);
+      }).style("fill", function (d) {
+        return color(d.rate);
+      }).attr("y", function (d) {
+        return y(0);
+      }).attr("height", function (d) {
+        return height - y(0);
+      }).on("mouseover", function (d) {
+        d3.select(this).style("fill", d3.rgb(color(d.rate)).darker(2));
+      }).on("mouseout", function (d) {
+        d3.select(this).style("fill", color(d.rate));
+      });
+
+      slice.selectAll("rect").transition().delay(function (d) {
+        return Math.random() * 1000;
+      }).duration(1000).attr("y", function (d) {
+        return y(d.value);
+      }).attr("height", function (d) {
+        return height - y(d.value);
+      });
+
+      //Legend
+      var legend = svg.selectAll(".legend").data(data[0].values.map(function (d) {
+        return d.rate;
+      }).reverse()).enter().append("g").attr("class", "legend").attr("transform", function (d, i) {
+        return "translate(0," + i * 20 + ")";
+      }).style("opacity", "0");
+
+      legend.append("rect").attr("x", width - 18).attr("width", 18).attr("height", 18).style("fill", function (d) {
+        return color(d);
+      });
+
+      legend.append("text").attr("x", width - 24).attr("y", 9).attr("dy", ".35em").style("text-anchor", "end").text(function (d) {
+        return d;
+      });
+
+      legend.transition().duration(500).delay(function (d, i) {
+        return 1300 + 100 * i;
+      }).style("opacity", "1");
     }
   }, {
     key: 'render',
@@ -342,7 +370,7 @@ var VisibilityToggle = function (_React$Component) {
         React.createElement(
           'h1',
           null,
-          'Data Visualization'
+          'trains per each hour'
         ),
         React.createElement(
           'form',

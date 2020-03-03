@@ -7,17 +7,13 @@ function TimeFormatter(stringTime) {
 }
 function xAxis(){
   let x=[];
-for (let index = 0; index < 24; index++) {
+  for (let index = 0; index < 24; index++) {
   x=x.concat(index);
   }
   return x;
 }
 function dataFormatter(height,width,trainTimes){
   let y= new Array(24).fill(0);
-  // console.log('dataFormatter');
-  // console.log(height+1);
-  // console.log(width+1);
-  // console.log(trainTimes+1);
   const x=xAxis(),Width=parseInt(width),Height=parseInt(height);
   for (let i = 1; i < 24; i++) {
     for (let index in trainTimes) {
@@ -29,11 +25,13 @@ function dataFormatter(height,width,trainTimes){
   const yMax=Math.max(...y),xMax=Math.max(...x);
   let dt=[],y0=0,x1=0;
   for (let i = 0; i < 24; i++) {
-    y0=y[i]*Height / yMax;
-    x1=x[i] * Width / xMax;
+    // y0=y[i]*Height / yMax;//original
+    // x1=x[i] * Width / xMax;//original
+    y0=y[i];
+    x1=x[i] ;
     // dt=dt.concat({x:x1,y:Height-y0});//ORIGINAL
     dt=dt.concat({x:x1,y:y0});
-} 
+  } 
   return dt;
 }
 function arange(n) {
@@ -42,8 +40,8 @@ function arange(n) {
 function serieInator(p1,p2,p3,p4,n) {
   let res=[];
   for (let i = 0; i < n; i++) {
-    let a1=p1[i],a2=p2[i],a3=p3[i],a4=p4[i],res0={};
-    res=res.concat(     {x:a1['x'],regularDay:a1['y'],thursday:a2['y'],friday:a3['y'],holiDay:a4['y']}    );
+    let a1=p1[i],a2=p2[i],a3=p3[i],a4=p4[i];
+    res=res.concat(     { x:a1['x'] , values: [ {value:a1['y'],rate:'regularDay'} , {value:a2['y'],rate:'thursday'} , {value:a3['y'],rate:'friday'} , {value:a4['y'],rate:'holiDay'}]} );
   }
   return(res);
 }
@@ -137,7 +135,6 @@ changekStation(){
 }
 fetchStatioData(){
   localStorage.setItem('index',0);
-  const height=400,width=600;
   const  sign=this.state.sign, station=this.state.station, line=this.state.line;
   // console.log(`${line} of route${sign} at station${station} on ${day}`);const day=this.state.day;
   
@@ -215,56 +212,118 @@ let ds3=JSON.parse(localStorage.getItem('holiD'));
 console.log('inator:');
 const data=serieInator(ds0,ds1,ds2,ds3,ds0['length']);
 console.log(data);
-let svg = d3.select("svg").attr("width", width).attr("height", height);
-// const color = d3.scaleOrdinal()
-//     .domain(data.columns.slice(1))
-//     .range(d3.schemeCategory10);s
-var z = d3.interpolateCool
+const margin = {top: 20, right: 20, bottom: 30, left: 40},
+    width = 960 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+let svg = d3.select("body")
+    .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-var stack = d3.stack()
-.keys(['regularDay','thursday','friday','holiDay'])
-.order(d3.stackOrderNone)
-.offset(d3.stackOffsetNone);
+let x0 = d3.scale.ordinal()
+    .rangeRoundBands([0, width], .1);
 
-var series = stack(data);
-localStorage.setItem('data',JSON.stringify(data));
-localStorage.setItem('series',JSON.stringify(series));
-// series = d3.stack()
-//     .keys(data.columns.slice(1))
-//     .offset(d3.stackOffsetWiggle)
-//     .order(d3.stackOrderInsideOut)
-//   (data);
-const margin = ({top: 0, right: 20, bottom: 30, left: 20});
-let x = d3.scaleUtc()
-    .domain(d3.extent(data, d => d.x))
-    .range([margin.left, width - margin.right]);
-let y = d3.scaleLinear()
-    .domain([d3.min(series, d => d3.min(d, d => d[0])), d3.max(series, d => d3.max(d, d => d[1]))])
-    .range([height - margin.bottom, margin.top]);
+let x1 = d3.scale.ordinal();
 
-const area = d3.area()
-    .x(d => x(d.data.x))
-    .y0(d => y(d[0]))
-    .y1(d => y(d[1]));
+let y = d3.scale.linear()
+    .range([height, 0]);
 
+let xAxis = d3.svg.axis()
+    .scale(x0)
+    .tickSize(0)
+    .orient("bottom");
+let yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left");
+let color = d3.scale.ordinal()
+    .range(["#ca0020","#f4a582","#d5d5d5","#92c5de","#0571b0"]);
+
+let categoriesNames = data.map(function(d) { return d.x; });
+let rateNames = data[0].values.map(function(d) { return d.rate; });
+
+x0.domain(categoriesNames);
+x1.domain(rateNames).rangeRoundBands([0, x0.rangeBand()]);
+y.domain(   [0, d3.max(data, function(x) { return d3.max(x.values, function(d) { return d.value; }  ); })]    );
+
+//axes
 svg.append("g")
-    .selectAll("path")
-    .data(series)
-    .join("path")
-        // .attr("fill", ({key}) => color(key))
-        .attr("d", area)
-        .attr("fill", () => z(Math.random()))
-    .append("title")
-        .text(({key}) => key);
+    .attr("class", "x axis")
+    .attr("transform", "translate(0," + height + ")")
+    .call(xAxis);
+svg.append("g")
+        .attr("class", "y axis")
+        .style('opacity','0')
+        .call(yAxis)
+    .append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 6)
+        .attr("dy", ".71em")
+        .style("text-anchor", "end")
+        .style('font-weight','bold')
+        .text("Value");
 
-// svg.append("g")
-//     .call(xAxis);
+
+svg.select('.y').transition().duration(500).delay(1300).style('opacity','1');
+
+let slice = svg.selectAll(".slice")
+    .data(data)
+    .enter().append("g")
+    .attr("class", "g")
+    .attr("transform",function(d) { return "translate(" + x0(d.x) + ",0)"; });
+
+slice.selectAll("rect")
+    .data(function(d) { return d.values; })
+.enter().append("rect")
+    .attr("width", x1.rangeBand())
+    .attr("x", function(d) { return x1(d.rate); })
+    .style("fill", function(d) { return color(d.rate) })
+    .attr("y", function(d) { return y(0); })
+    .attr("height", function(d) { return height - y(0); })
+    .on("mouseover", function(d) {
+        d3.select(this).style("fill", d3.rgb(color(d.rate)).darker(2));
+    })
+    .on("mouseout", function(d) {
+        d3.select(this).style("fill", color(d.rate));
+    });
+
+slice.selectAll("rect")
+    .transition()
+    .delay(function (d) {return Math.random()*1000;})
+    .duration(1000)
+    .attr("y", function(d) { return y(d.value); })
+    .attr("height", function(d) { return height - y(d.value); });
+
+//Legend
+let legend = svg.selectAll(".legend")
+    .data(data[0].values.map(function(d) { return d.rate; }).reverse())
+.enter().append("g")
+    .attr("class", "legend")
+    .attr("transform", function(d,i) { return "translate(0," + i * 20 + ")"; })
+    .style("opacity","0");
+
+legend.append("rect")
+    .attr("x", width - 18)
+    .attr("width", 18)
+    .attr("height", 18)
+    .style("fill", function(d) { return color(d); });
+
+legend.append("text")
+    .attr("x", width - 24)
+    .attr("y", 9)
+    .attr("dy", ".35em")
+    .style("text-anchor", "end")
+    .text(function(d) {return d; });
+
+legend.transition().duration(500).delay(function(d,i){ return 1300 + 100 * i; }).style("opacity","1");
+
 }
 
   
   render() {
     return (<div>
-      <h1>Data Visualization</h1>
+      <h1>trains per each hour</h1>
       <form onSubmit={this.onFormSubmit}>
         {false && (<select onChange={this.changeDay} defaultValue='noDay' id='DL'>
           <option className='day' id='nd' disabled='true' value="noDay">--select day--</option>

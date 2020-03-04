@@ -63,7 +63,7 @@ function serieInator(p1, p2, p3, p4, n) {
         a2 = p2[i],
         a3 = p3[i],
         a4 = p4[i];
-    res = res.concat({ x: a1['x'], values: [{ value: a1['y'], rate: 'regularDay' }, { value: a2['y'], rate: 'thursday' }, { value: a3['y'], rate: 'friday' }, { value: a4['y'], rate: 'holiDay' }] });
+    res = res.concat({ x: a1['x'], values: [{ value: a1['y'], rate: 'روزهای شنبه تا چهارشنبه' }, { value: a2['y'], rate: 'روزهای پنجشنبه' }, { value: a3['y'], rate: 'روزهای جمعه' }, { value: a4['y'], rate: 'روزهای تعطیل' }] });
   }
   return res;
 }
@@ -155,7 +155,7 @@ var VisibilityToggle = function (_React$Component) {
         return { sign: sgn };
       });
       var line = this.state.line;
-      fetch('../src/' + line + sgn + '.json').then(function (response) {
+      fetch('../src/' + line + sgn + 'Fa.json').then(function (response) {
         return response.text();
       }).then(function (data) {
         localStorage.setItem('stationsName', data);
@@ -310,7 +310,7 @@ var VisibilityToggle = function (_React$Component) {
 
       //axes
       svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(xAxis);
-      svg.append("g").attr("class", "y axis").style('opacity', '0').call(yAxis).append("text").attr("transform", "rotate(-90)").attr("y", 6).attr("dy", ".71em").style("text-anchor", "end").style('font-weight', 'bold').text("Value");
+      svg.append("g").attr("class", "y axis").style('opacity', '0').call(yAxis).append("text").attr("transform", "rotate(-90)").attr("y", 6).attr("dy", ".71em").style("text-anchor", "end").style('font-weight', 'bold').text("تعداد قطار");
 
       svg.select('.y').transition().duration(500).delay(1300).style('opacity', '1');
 
@@ -415,22 +415,22 @@ var VisibilityToggle = function (_React$Component) {
             React.createElement(
               'option',
               { className: 'line', id: 'line1', value: 'line1' },
-              'line 1'
+              '\u062E\u0637 \u06CC\u06A9'
             ),
             React.createElement(
               'option',
               { className: 'line', id: 'line2', value: 'line2' },
-              'line 2'
+              '\u062E\u0637 \u062F\u0648'
             ),
             React.createElement(
               'option',
               { className: 'line', id: 'line3', value: 'line3' },
-              'line 3'
+              '\u062E\u0637 \u0633\u0647'
             ),
             React.createElement(
               'option',
               { className: 'line', id: 'line4', value: 'line4' },
-              'line 4'
+              '\u062E\u0637 \u0686\u0647\u0627\u0631'
             )
           ),
           true && React.createElement(
@@ -444,12 +444,12 @@ var VisibilityToggle = function (_React$Component) {
             React.createElement(
               'option',
               { id: 'positiveRoute', value: 'positive' },
-              ' line 2'
+              '\u0645\u0633\u06CC\u0631 \u0631\u0641\u062A'
             ),
             React.createElement(
               'option',
               { id: 'negativeRoute', value: 'negative' },
-              ' line 3'
+              '\u0645\u0633\u06CC\u0631 \u0628\u0631\u06AF\u0636\u062A'
             )
           ),
           this.state.RouteVis && React.createElement(

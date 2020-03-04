@@ -41,7 +41,7 @@ function serieInator(p1,p2,p3,p4,n) {
   let res=[];
   for (let i = 0; i < n; i++) {
     let a1=p1[i],a2=p2[i],a3=p3[i],a4=p4[i];
-    res=res.concat(     { x:a1['x'] , values: [ {value:a1['y'],rate:'regularDay'} , {value:a2['y'],rate:'thursday'} , {value:a3['y'],rate:'friday'} , {value:a4['y'],rate:'holiDay'}]} );
+    res=res.concat(     { x:a1['x'] , values: [ {value:a1['y'],rate:'روزهای شنبه تا چهارشنبه'} , {value:a2['y'],rate:'روزهای پنجشنبه'} , {value:a3['y'],rate:'روزهای جمعه'} , {value:a4['y'],rate:'روزهای تعطیل'}]} );
   }
   return(res);
 }
@@ -96,7 +96,7 @@ changeRoute(){
   this.setState((prevState)=>{  return {StVis: true};   }     );
   this.setState((prevState)=>{  return {sign:sgn};   }     );
   const line=this.state.line;
-  fetch(`../src/${line}${sgn}.json`).then(response => response.text()).then(function (data) {localStorage.setItem('stationsName',data);});
+  fetch(`../src/${line}${sgn}Fa.json`).then(response => response.text()).then(function (data) {localStorage.setItem('stationsName',data);});
   let sts=JSON.parse(localStorage.getItem('stationsName'));
   sts=sts[line];
   let stations=[];
@@ -262,7 +262,7 @@ svg.append("g")
         .attr("dy", ".71em")
         .style("text-anchor", "end")
         .style('font-weight','bold')
-        .text("Value");
+        .text("تعداد قطار");
 
 
 svg.select('.y').transition().duration(500).delay(1300).style('opacity','1');
@@ -334,18 +334,17 @@ legend.transition().duration(500).delay(function(d,i){ return 1300 + 100 * i; })
         </select>)}
         {true &&(<select className='line' onChange={this.changeLine} defaultValue='noLine' id='LL'>
           <option className='line' id='nl' disabled='true' value="noLine">--select line--</option>
-          <option className='line' id="line1" value="line1">line 1</option>
-          <option className='line' id="line2" value="line2">line 2</option>
-          <option className='line' id="line3" value="line3">line 3</option>
-          <option className='line' id="line4" value="line4">line 4</option>
+          <option className='line' id="line1" value="line1">خط یک</option>
+          <option className='line' id="line2" value="line2">خط دو</option>
+          <option className='line' id="line3" value="line3">خط سه</option>
+          <option className='line' id="line4" value="line4">خط چهار</option>
         </select>)}
       
         {true &&(<select id='RL' defaultValue='noRoute' disabled={!this.state.RouteVis} onClick={this.clickRoute} onChange={this.changeRoute}>
           <option disabled='true' value="noRoute">--select route--</option>
-          <option id='positiveRoute' value="positive"> line 2</option>
-          <option id='negativeRoute' value="negative"> line 3</option>
+          <option id='positiveRoute' value="positive">مسیر رفت</option>
+          <option id='negativeRoute' value="negative">مسیر برگضت</option>
         </select>)}
-      
         {this.state.RouteVis&&  (<select id='SL' disabled={!this.state.StVis} defaultValue='noStation' onClick={this.clickStation} onChange={this.changekStation}>    
           <option disabled='true' value='noStation'>--select station--</option>
         </select>)}

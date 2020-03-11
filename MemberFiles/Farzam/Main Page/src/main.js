@@ -1,6 +1,6 @@
 class MainPage extends React.Component {
   render() {
-    const title = 'برای سفر راحت ، هوشمند عمل کن',hyperTexts=['صفحه اصلی','شبیه سازی'],number='02188888';
+    const title = 'برای سفر راحت ، هوشمند عمل کن',hyperTexts=['صفحه اصلی','شبیه سازی'],number='تماس با ما';
 
     return (
       <div>
@@ -38,7 +38,7 @@ class Header extends React.Component {
           </svg>
         </div>
         <div>
-          <label className="header contactNum" >{this.props.num}</label>
+          <a href='' className="header contactNum" >{this.props.num}</a>
         </div>
       </div>
     );

@@ -22,7 +22,7 @@ var MainPage = function (_React$Component) {
     value: function render() {
       var title = 'برای سفر راحت ، هوشمند عمل کن',
           hyperTexts = ['صفحه اصلی', 'شبیه سازی'],
-          number = '02188888';
+          number = 'تماس با ما';
 
       return React.createElement(
         'div',
@@ -114,8 +114,8 @@ var Header = function (_React$Component3) {
           'div',
           null,
           React.createElement(
-            'label',
-            { className: 'header contactNum' },
+            'a',
+            { href: '', className: 'header contactNum' },
             this.props.num
           )
         )
